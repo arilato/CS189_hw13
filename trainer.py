@@ -53,5 +53,14 @@ class Solver(object):
         Implement SGD using the data manager to compute the batches
         Make sure to record the training and test loss through out the process
         '''
+        for i in range(1000):
+            image_train, label_train = self.data.get_train_batch()
+            image_test, label_test = self.data.get_validation_batch()
+            feed_dict_train = {self.net.images: images_train, self.net.labels: labels_train}
+            feed_dict_test = {self.net.images: images_test, self.net.labels: labels_test}
+            self.sess.run([self.train],feed_dict=feed_dict)
+            self.train_losses.append(self.run(self.net.accuracy, feed_dict=feed_dict_train))
+            self.test_losses.append(self.run(self.net.accuracy, feed_dict=feed_dict_test))
+
 
    

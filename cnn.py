@@ -48,7 +48,11 @@ class CNN(object):
                 Network should start out with the images function
                 Then it should return net
                 '''
-
+                net = slim.conv2d(images, 5, [15, 15], scope='conv_0')
+                net = slim.max_pool2d(net, [3, 3], scope='pool')
+                net = slim.flatten(net, scope='flat')
+                net = slim.fully_connected(net, 512, scope='fc_2')
+                net = slim.fully_connected(net, 25, scope='fc_3')
 
         return net
 

@@ -6,7 +6,7 @@ import cv2
 import copy
 import glob
 
-import cPickle as pickle
+import pickle
 import IPython
 
 
@@ -59,7 +59,10 @@ class data_manager(object):
         The batch size should be size 40
 
         '''
-
+        index = np.random.permutation(len(self.train_data))[0:self.batch_size]
+        images = [self.train_data[i]['features'] for i in index]
+        labels = [self.train_data[i]['label'] for i in index]
+        return images, labels
 
 
     def get_empty_state(self):
@@ -88,7 +91,10 @@ class data_manager(object):
         The batch size should be size 400
 
         '''
-        #FILL IN
+        index = np.random.permutation(len(self.val_data))[0:self.val_batch_size]
+        images = [self.val_data[i]['features'] for i in index]
+        labels = [self.val_data[i]['label'] for i in index]
+        return images, labels
 
 
 
